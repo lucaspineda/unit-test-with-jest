@@ -9,7 +9,7 @@ describe('Favorite Movies', () => {
     }]
   })
 
-  test('can add a movie', () => {
+  test.only('can add a movie', () => {
     movies.add(myMovies, 'Kung Fury')
     expect(myMovies).toMatchSnapshot()
   })
