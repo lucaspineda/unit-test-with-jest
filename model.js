@@ -9,11 +9,27 @@ export default class Model {
   }
 
   record(data) {
-    this.$collection.push(... data)
+    const primaryKey = 'id'
+    const mappedData = data.map(entry => {
+      if (entry[primaryKey]) {
+        return entry
+      }
+      entry[primaryKey] = Date.now()
+      return entry
+    })
+    this.$collection.push(...mappedData)
   }
   all() {
     return this.$collection.map(entry => Object.assign({}, entry))
   }
   update() {}
-  find() {}
+  find(value) {
+    const primaryKey = 'id'
+    const entry = this.$collection.find(entry => entry[primaryKey] === value)
+    if(entry) {
+      return Object.assign({}, entry)
+      // return entry
+    }
+    return null
+  }
 }
