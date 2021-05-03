@@ -8,10 +8,12 @@ test('mount', () => {
       value: 'Another Test'
     }
   })
-  expect(wrapper.html()).toMatchSnapshot()
+  expect(wrapper).toMatchSnapshot()
 });
 
-test('ListComponent shallow', () => {
-  console.log(mount(List).html())
-  console.log(shallowMount(List).html())
+test('ListComponent', () => {
+  const wrapper = mount(List)
+  const movies = wrapper.vm.marvelMovies
+  wrapper.setData({ marvelMovies: [ ...movies, 'Endgamee' ]})
+  expect(wrapper).toMatchSnapshot()
 });
